@@ -27,11 +27,11 @@ public class TestDriver {
         // Q9.
 //        System.out.println(es.isArmstrongNumber(11));
         // Q10.
-//        System.out.println(es.calculatePrimeFactorsOf(500l));
+//        System.out.println(es.calculatePrimeFactorsOf(901255L));
         // Q11.
 //        System.out.println(rc.rotate("OMG"));
         // Q12.
-//        es.calculateNthPrime(1)Q.
+        System.out.print(es.calculateNthPrime(10001));
         // Q13.
 //        System.out.println(AtbashCipher.encode("vcvix rhn"));
         // Q14.
@@ -41,10 +41,11 @@ public class TestDriver {
         // Q16.
 //        System.out.println(es.isPangram("test"));
         // Q17.
+//        System.out.println(es.getGigasecondDate(LocalDate.of(1977, Month.JUNE, 13)));
         // Q18.
         // Q19.
 //        System.out.println(es.isLuhnValid("4539 1488 0343 6467"));
         // Q20.
-        System.out.println(es.solveWordProblem("What is -25 divided by +5?"));
+//        System.out.println(es.solveWordProblem("What is 1 plus 1?"));
     }
 }

@@ -1,5 +1,8 @@
 package com.revature.eval.java.core;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -766,8 +769,13 @@ public class EvaluationService {
      * @return
      */
     public Temporal getGigasecondDate(Temporal given) {
-        // TODO Write an implementation for this method declaration
-        return null;
+        LocalDateTime givenWithAddedTimeStamp = LocalDateTime.now();
+        if (given instanceof LocalDate) {
+            givenWithAddedTimeStamp = LocalDateTime.of((LocalDate) given, LocalTime.of(0, 0, 0));
+        } else if (given instanceof LocalDateTime) {
+            givenWithAddedTimeStamp = (LocalDateTime) given;
+        }
+        return givenWithAddedTimeStamp.plusSeconds((long) Math.pow(10, 9));
     }
 
     /**
@@ -909,31 +917,42 @@ public class EvaluationService {
      * @param string
      * @return
      */
-    public int solveWordProblem(String algebraInquary) {
-        String[] splittedPhrase = algebraInquary.split("[ ,?!]+");
+    public int solveWordProblem(String algebraInquary) throws IllegalArgumentException {
+        String[] words = algebraInquary.split("[ ,?!]+");
 
-        ArrayList<Integer> locIndexOfNumbers = new ArrayList<Integer>();
-        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        int[] locIndexOfNumbers = new int[2];
+        int[] numbers = new int[2];
 
-        for (int index = 0; index < splittedPhrase.length; index++) {
-            if (splittedPhrase[index].matches("^[\\d\\-\\+][\\d]*")) {
-                locIndexOfNumbers.add(index);
-                numbers.add(Integer.valueOf(splittedPhrase[index]));
+        int numberIndex = 0;
+        for (int wordIndex = 0; wordIndex < words.length; wordIndex++) {
+            if (words[wordIndex].matches("^[\\d\\-\\+][\\d]*")) {
+                locIndexOfNumbers[numberIndex] = wordIndex;
+                numbers[numberIndex] = Integer.valueOf(words[wordIndex]);
+                numberIndex++;
             }
         }
-//        System.out.println(locIndexOfNumbers);
-//        System.out.println(numbers);
 
-        String operatorDescription = splittedPhrase[locIndexOfNumbers.get(0) + 1] + " "
-                + splittedPhrase[locIndexOfNumbers.get(1) - 1];
-//        System.out.println(operatorDescription);
+        String operatorDescription = "";
+        int locIndex = locIndexOfNumbers[0];
+        do {
+            operatorDescription += words[locIndex + 1] + ' ';
+            locIndex += 1;
+        } while (locIndex < locIndexOfNumbers[1] - 1);
 
-        return 0;
-    }
+        switch (operatorDescription) {
+        case "plus ":
+            return numbers[0] + numbers[1];
+        case "minus ":
+            return numbers[0] - numbers[1];
+        case "multiplied by ":
+            return numbers[0] * numbers[1];
+        case "divided by ":
+            return numbers[0] / numbers[1];
+        default:
+            System.out.println("Sorry I don't understand.");
+            throw new IllegalArgumentException();
+        }
 
-    public char resolveOperator(String operatorDescriptionInPlainWords) {
-
-        return '+';
     }
 
 }
