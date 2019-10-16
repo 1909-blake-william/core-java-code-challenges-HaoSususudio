@@ -240,7 +240,7 @@ public class EvaluationService {
 
         // Check if first number of tenDigitPhoneNumber is 1.
         // Then drop the first number oftenDigitPhoneNumber.
-        // Then check if tenDigitPhoneNumber has 10.
+        // Then check if tenDigitPhoneNumber has 10 digits.
         if (tenDigitPhoneNumber.length() == 11 && tenDigitPhoneNumber.charAt(0) != '1') {
             throw new IllegalArgumentException();
         } else if (tenDigitPhoneNumber.length() == 11) {
