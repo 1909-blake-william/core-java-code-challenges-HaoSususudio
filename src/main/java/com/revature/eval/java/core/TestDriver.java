@@ -1,5 +1,9 @@
 package com.revature.eval.java.core;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import com.revature.eval.java.core.EvaluationService.AtbashCipher;
 import com.revature.eval.java.core.EvaluationService.RotationalCipher;
 
@@ -22,6 +26,13 @@ public class TestDriver {
         // Q6.
 //        System.out.println(es.wordCount("one,\ntwo,\nthree"));
         // Q7.
+        List<Integer> sortedList = Collections
+                .unmodifiableList(Arrays.asList(0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22));
+        EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedList);
+
+        System.out.println(search.indexOf(3));
+//        System.out.println("6".compareTo("11"));
+
 //         Q8.
 //        System.out.println(es.toPigLatin("I love you"));
         // Q9.
@@ -31,7 +42,7 @@ public class TestDriver {
         // Q11.
 //        System.out.println(rc.rotate("OMG"));
         // Q12.
-        System.out.print(es.calculateNthPrime(10001));
+//        System.out.print(es.calculateNthPrime(10001));
         // Q13.
 //        System.out.println(AtbashCipher.encode("vcvix rhn"));
         // Q14.

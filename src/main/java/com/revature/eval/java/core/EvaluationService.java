@@ -315,13 +315,39 @@ public class EvaluationService {
      * binary search is a dichotomic divide and conquer search algorithm.
      * 
      */
-    static class BinarySearch<T> {
+    static class BinarySearch<T extends Comparable<T>> {
         private List<T> sortedList;
 
         public int indexOf(T t) {
-            // <T extends comparable<T>>
-            // TODO Write an implementation for this method declaration
-            return 0;
+            if (!this.sortedList.contains(t)) {
+                System.out.println("Element is not found in the sortedList");
+                return -1;
+            }
+
+            int stepsOfIndexMovement = this.sortedList.size() / 2;
+            int midIndex = stepsOfIndexMovement;
+            int singleStepMoveCount = 0;
+//            System.out.println("before while loop: index:" + midIndex + ", steps: " + stepsOfIndexMovement);
+            while (t.compareTo(this.sortedList.get(midIndex)) != 0 && singleStepMoveCount < 3) {
+                stepsOfIndexMovement = (int) Math.ceil((double) (stepsOfIndexMovement / 2.0));
+//                System.out.println("before move: index:" + midIndex + ", steps: " + stepsOfIndexMovement);
+                if (t.compareTo(this.sortedList.get(midIndex)) > 0) {
+                    midIndex += stepsOfIndexMovement;
+                } else if (t.compareTo(this.sortedList.get(midIndex)) < 0) {
+                    midIndex -= stepsOfIndexMovement;
+                }
+//                System.out.println("after move: index:" + midIndex + ", steps: " + stepsOfIndexMovement);
+                if (stepsOfIndexMovement == 1) {
+                    singleStepMoveCount++;
+                }
+            }
+//            System.out.println("single step:" + singleStepMoveCount);
+            if (singleStepMoveCount == 3) {
+                System.out.println("Element is not found in the sortedList");
+                return -1;
+            } else {
+                return midIndex;
+            }
         }
 
         public BinarySearch(List<T> sortedList) {
@@ -431,11 +457,8 @@ public class EvaluationService {
         for (char c : inputNumberChars) {
             sum += Math.pow(Character.getNumericValue(c), decimalExponent);
         }
-        if (sum == input) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return sum == input ? true : false;
     }
 
     /**
@@ -566,7 +589,7 @@ public class EvaluationService {
             }
             naturalNumberRunner += 1;
         }
-        System.out.println(primeNumbers);
+//        System.out.println(primeNumbers);
         return primeNumbers.get(primeNumbers.size() - 1);
     }
 
@@ -719,12 +742,7 @@ public class EvaluationService {
         }
 
         // Check sum results.
-        if (sumISBN % 11 == 0) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return sumISBN % 11 == 0 ? true : false;
     }
 
     /**
@@ -753,11 +771,7 @@ public class EvaluationService {
             }
         }
 
-        if (ifLettersUsed.containsValue(false)) {
-            return false;
-        } else {
-            return true;
-        }
+        return ifLettersUsed.containsValue(false) ? false : true;
     }
 
     /**
@@ -873,11 +887,7 @@ public class EvaluationService {
             luhnSum += luhnDigitDoubler(Character.getNumericValue(digitsCollector.charAt(index)));
         }
 
-        if (luhnSum % 10 == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return luhnSum % 10 == 0 ? true : false;
     }
 
     public int luhnDigitDoubler(int digit) throws IllegalArgumentException {
