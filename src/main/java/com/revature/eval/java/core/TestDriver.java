@@ -26,13 +26,20 @@ public class TestDriver {
         // Q6.
 //        System.out.println(es.wordCount("one,\ntwo,\nthree"));
         // Q7.
-        List<Integer> sortedList = Collections
-                .unmodifiableList(Arrays.asList(0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22));
-        EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedList);
+        List<String> sortedList = Collections.unmodifiableList(Arrays.asList("1", "3", "4", "6", "8", "9", "11"));
 
-        System.out.println(search.indexOf(3));
-//        System.out.println("6".compareTo("11"));
+        EvaluationService.BinarySearch<String> search = new EvaluationService.BinarySearch<>(sortedList);
 
+//        assertEquals(3, search.indexOf("6"));
+        System.out.println("\"1\" compTo \"3\": " + "1".compareTo("3"));
+        System.out.println("\"3\" compTo \"4\": " + "3".compareTo("4"));
+        System.out.println("\"4\" compTo \"6\": " + "4".compareTo("6"));
+        System.out.println("\"6\" compTo \"8\": " + "6".compareTo("8"));
+        System.out.println("\"8\" compTo \"9\": " + "8".compareTo("9"));
+        System.out.println("\"9\" compTo \"11\": " + "9".compareTo("11"));
+        System.out.println("\n");
+        System.out.println("\"1\" compTo \"11\": " + "1".compareTo("11"));
+        System.out.println("\"11\" compTo \"3\": " + "11".compareTo("3"));
 //         Q8.
 //        System.out.println(es.toPigLatin("I love you"));
         // Q9.
